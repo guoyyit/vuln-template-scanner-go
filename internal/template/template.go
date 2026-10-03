@@ -54,13 +54,13 @@ type RequestDef struct {
 
 // Condition 单条命中条件。
 type Condition struct {
-	ID      string   `yaml:"id" json:"id"`
-	Type    string   `yaml:"type" json:"type"` // status | header | body
-	Negate  bool     `yaml:"negate" json:"negate"`
-	Status  []int    `yaml:"status" json:"status"`     // type=status
-	Header  string   `yaml:"header" json:"header"`     // type=header：响应头名
+	ID       string   `yaml:"id" json:"id"`
+	Type     string   `yaml:"type" json:"type"` // status | header | body
+	Negate   bool     `yaml:"negate" json:"negate"`
+	Status   []int    `yaml:"status" json:"status"`     // type=status
+	Header   string   `yaml:"header" json:"header"`     // type=header：响应头名
 	Contains []string `yaml:"contains" json:"contains"` // type=header/body：子串（任一命中）
-	Regex   []string `yaml:"regex" json:"regex"`       // type=header/body：正则（任一命中）
+	Regex    []string `yaml:"regex" json:"regex"`       // type=header/body：正则（任一命中）
 }
 
 // MatchBlock 命中判定块。
@@ -85,7 +85,7 @@ type Template struct {
 // Variant 由模板派生的一个具体请求。
 type Variant struct {
 	TemplateID string
-	Index      int // 派生序号，从 0 开始，顺序稳定
+	Index      int    // 派生序号，从 0 开始，顺序稳定
 	Key        string // 稳定标识：请求序号+变量赋值
 	Method     string
 	Path       string
