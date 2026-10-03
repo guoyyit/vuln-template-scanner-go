@@ -1,0 +1,17 @@
+id: debug-token-leak
+version: 2
+info:
+  name: Debug Token Leak
+  severity: high
+  tags: [leak, token]
+requests:
+  - method: GET
+    path: /debug/vars
+    headers:
+      X-Probe: scanner
+match:
+  combinator: any
+  conditions:
+    - id: token-in-body
+      type: body
+      regex: ["token[\"']?\\s*[:=]\\s*[\"'][A-Za-z0-9_-]{8,}"]

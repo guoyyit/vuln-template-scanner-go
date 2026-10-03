@@ -1,0 +1,11 @@
+id: legacy-server-header
+info:
+  name: Legacy Server Header (v1 template)
+  severity: info
+  tags: [fingerprint]
+requests:
+  - path: /
+match:
+  conditions:
+    - type: status
+      status: [200, 301, 302]

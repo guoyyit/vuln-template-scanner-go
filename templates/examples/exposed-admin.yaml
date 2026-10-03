@@ -1,0 +1,25 @@
+id: exposed-admin-panel
+version: 2
+info:
+  name: Exposed Admin Panel
+  severity: medium
+  tags: [exposure, panel]
+variables:
+  base: [admin, manage, backend]
+requests:
+  - method: GET
+    path: /{{base}}/
+match:
+  combinator: all
+  conditions:
+    - id: ok
+      type: status
+      status: [200]
+    - id: title
+      type: body
+      contains: ["Admin", "Dashboard"]
+    - id: not-login-redirect
+      type: header
+      header: Location
+      contains: ["login"]
+      negate: true
