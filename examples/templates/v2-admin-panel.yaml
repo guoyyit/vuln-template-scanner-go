@@ -1,0 +1,33 @@
+schema_version: "2"
+id: admin-panel-exposed
+info:
+  name: Exposed Admin Panel
+  author: scanner-team
+  severity: high
+  tags: [web, panel, misconfig]
+  description: Detects exposed administration panels by path and response markers.
+variables:
+  paths:
+    values: [admin, administrator, wp-admin, manage, console]
+variants:
+  - id: panel
+    request:
+      method: GET
+      path: /{{paths}}
+matchers:
+  - id: status-ok
+    type: status
+    status: [200]
+  - id: panel-markers
+    type: word
+    part: body
+    words: ["admin", "login", "dashboard"]
+    operator: or
+    case: insensitive
+  - id: not-generic
+    type: logic
+    operator: not
+    matchers:
+      - id: not-404
+        type: status
+        status: [404]

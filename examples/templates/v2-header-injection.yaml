@@ -1,0 +1,16 @@
+schema_version: "2"
+id: server-header-disclosure
+info:
+  name: Server Header Disclosure
+  author: scanner-team
+  severity: info
+  tags: [header, recon]
+  description: Flags responses that disclose a Server header value.
+request:
+  method: GET
+  path: /
+matchers:
+  - id: has-server-header
+    type: header
+    header: Server
+    exists: true
